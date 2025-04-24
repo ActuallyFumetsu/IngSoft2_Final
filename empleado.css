@@ -1,0 +1,62 @@
+.employee-container {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+.employee-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.library-management,
+.author-management,
+.genre-management,
+.shelf-management,
+.sale-detail-management,
+.sale-header-management,
+.customer-management {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.employee-container h3 {
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.employee-container p {
+    color: #777;
+    text-align: center;
+}
+
+.employee-container button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 150px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+.employee-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Aquí puedes añadir más estilos específicos para los formularios y tablas */
