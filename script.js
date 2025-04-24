@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Editar un usuario
-  function editUser(index) {
+  window.editUser = function(index) {  // Usar window para que la función sea accesible globalmente
     const user = usuarios[index];
     document.getElementById("new-username").value = user.username;
     document.getElementById("new-password").value = user.password;
@@ -108,12 +108,12 @@ document.addEventListener("DOMContentLoaded", function() {
       // Restaurar el texto y la función del botón
       const submitButton = event.target;
       submitButton.textContent = "Añadir Usuario";
-      submitButton.onclick = addUser;
+      submitButton.onclick = addUser;  // Restaurar la acción de añadir
     }
   }
 
   // Eliminar un usuario
-  function deleteUser(index) {
+  window.deleteUser = function(index) {  // Usar window para que la función sea accesible globalmente
     if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
       usuarios.splice(index, 1);
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
@@ -135,3 +135,4 @@ document.addEventListener("DOMContentLoaded", function() {
   // Cargar la lista de usuarios cuando la página se cargue
   loadUsers();
 });
+
