@@ -8,11 +8,43 @@
 <body>
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
-    <input type="text" id="username" placeholder="Usuario">
-    <input type="password" id="password" placeholder="Contraseña">
+    <input type="text" id="username" placeholder="Usuario" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
     <button onclick="login()">Entrar</button>
     <p id="error-msg"></p>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    // Usuarios predefinidos
+    const usuarios = [
+      { username: "usuario", password: "usuario123", rol: "usuario" },
+      { username: "empleado", password: "empleado123", rol: "empleado" },
+      { username: "admin", password: "admin123", rol: "admin" }
+    ];
+
+    // Guardar en localStorage si no existen
+    if (!localStorage.getItem("usuarios")) {
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("error-msg");
+
+      const users = JSON.parse(localStorage.getItem("usuarios"));
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        localStorage.setItem("usuarioActual", JSON.stringify(user));
+        // Redirigir por rol (esto lo vas a definir más adelante)
+        alert(`Bienvenido, ${user.username}. Rol: ${user.rol}`);
+        // Aquí iría algo como: window.location.href = `${user.rol}.html`;
+      } else {
+        errorMsg.textContent = "Usuario o contraseña incorrectos.";
+        errorMsg.style.color = "red";
+      }
+    }
+  </script>
 </body>
 </html>
