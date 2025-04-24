@@ -4,6 +4,65 @@
   <meta charset="UTF-8">
   <title>Iniciar Sesión</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #84fab0, #8fd3f4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #error-msg {
+      margin-top: 10px;
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -15,16 +74,15 @@
   </div>
 
   <script>
-    // Usuarios predefinidos
-    const usuarios = [
+    // Crear usuarios por defecto si no existen
+    const defaultUsers = [
       { username: "usuario", password: "usuario123", rol: "usuario" },
       { username: "empleado", password: "empleado123", rol: "empleado" },
       { username: "admin", password: "admin123", rol: "admin" }
     ];
 
-    // Guardar en localStorage si no existen
     if (!localStorage.getItem("usuarios")) {
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      localStorage.setItem("usuarios", JSON.stringify(defaultUsers));
     }
 
     function login() {
@@ -32,19 +90,25 @@
       const password = document.getElementById("password").value.trim();
       const errorMsg = document.getElementById("error-msg");
 
-      const users = JSON.parse(localStorage.getItem("usuarios"));
-      const user = users.find(u => u.username === username && u.password === password);
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      const user = usuarios.find(u => u.username === username && u.password === password);
 
       if (user) {
         localStorage.setItem("usuarioActual", JSON.stringify(user));
-        // Redirigir por rol (esto lo vas a definir más adelante)
-        alert(`Bienvenido, ${user.username}. Rol: ${user.rol}`);
-        // Aquí iría algo como: window.location.href = `${user.rol}.html`;
+
+        if (user.rol === "admin") {
+          window.location.href = "admin.html";
+        } else {
+          window.location.href = "usuario.html";
+        }
       } else {
         errorMsg.textContent = "Usuario o contraseña incorrectos.";
-        errorMsg.style.color = "red";
       }
     }
+  </script>
+</body>
+</html>
+
   </script>
 </body>
 </html>
