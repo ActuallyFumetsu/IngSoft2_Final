@@ -186,3 +186,66 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ... (similar para ventas y clientes)
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // --- SIMULACIÓN DE BASE DE DATOS DE LIBROS ---
+    let libros = [
+        { id: 1, titulo: 'Cien años de soledad', autor: 'Gabriel García Márquez', genero: 'Ficción', estante: 'A1' },
+        { id: 2, titulo: 'El Señor de los Anillos', autor: 'J.R.R. Tolkien', genero: 'Fantasía', estante: 'B3' }
+    ];
+
+    const addBookForm = document.getElementById('add-book-form');
+    const bookListTbody = document.getElementById('book-list');
+    const addBookMessageDiv = document.getElementById('add-book-message');
+
+    // --- FUNCIONES PARA GESTIONAR LIBROS ---
+    function mostrarLibros() {
+        bookListTbody.innerHTML = ''; // Limpiar la tabla antes de actualizarla
+        libros.forEach(libro => {
+            const row = bookListTbody.insertRow();
+            row.insertCell().textContent = libro.id;
+            row.insertCell().textContent = libro.titulo;
+            row.insertCell().textContent = libro.autor;
+            row.insertCell().textContent = libro.genero;
+            row.insertCell().textContent = libro.estante;
+            const actionsCell = row.insertCell();
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Editar';
+            // Aquí se añadiría la lógica para editar
+            actionsCell.appendChild(editButton);
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.addEventListener('click', () => eliminarLibro(libro.id));
+            actionsCell.appendChild(deleteButton);
+        });
+    }
+
+    function agregarLibro(titulo, autor, genero, estante) {
+        const nuevoId = libros.length > 0 ? Math.max(...libros.map(libro => libro.id)) + 1 : 1;
+        const nuevoLibro = { id: nuevoId, titulo, autor, genero, estante };
+        libros.push(nuevoLibro);
+        mostrarLibros();
+        addBookMessageDiv.textContent = `Libro "${titulo}" añadido con éxito.`;
+        addBookMessageDiv.className = 'message success';
+        addBookForm.reset();
+    }
+
+    function eliminarLibro(id) {
+        libros = libros.filter(libro => libro.id !== id);
+        mostrarLibros();
+        console.log(`Libro con ID ${id} eliminado.`);
+    }
+
+    // --- EVENT LISTENER PARA EL FORMULARIO DE AÑADIR LIBRO ---
+    addBookForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const titulo = document.getElementById('book-title').value;
+        const autor = document.getElementById('book-author').value;
+        const genero = document.getElementById('book-genre').value;
+        const estante = document.getElementById('book-shelf').value;
+        agregarLibro(titulo, autor, genero, estante);
+    });
+
+    // --- INICIALIZACIÓN ---
+    mostrarLibros(); // Mostrar los libros iniciales al cargar la página
+});
