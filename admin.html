@@ -1,3 +1,4 @@
+<!-- admin.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,80 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Gestión de Usuarios</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .admin-container {
-      background-color: white;
-      padding: 20px 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 600px;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border: 1px solid #ddd;
-    }
-
-    button {
-      background-color: #3498db;
-      color: white;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    .form-container {
-      margin-top: 20px;
-    }
-
-    .form-container input {
-      padding: 10px;
-      margin: 8px 0;
-      width: 200px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .form-container button {
-      margin-top: 10px;
-      width: 100%;
-    }
-  </style>
 </head>
 <body>
   <div class="admin-container">
-    <h1>Gestión de Usuarios - Administrador</h1>
+    <h1>Panel de Administración</h1>
+
     <table id="users-table">
       <thead>
         <tr>
@@ -88,130 +20,25 @@
         </tr>
       </thead>
       <tbody>
-        <!-- La lista de usuarios se generará dinámicamente -->
+        <!-- Aquí se listarán los usuarios -->
       </tbody>
     </table>
 
-    <div class="form-container">
-      <h3>Añadir / Editar Usuario</h3>
-      <input type="text" id="new-username" placeholder="Nuevo usuario">
-      <input type="password" id="new-password" placeholder="Contraseña">
+    <h2>Añadir / Editar Usuario</h2>
+    <form id="user-form">
+      <input type="text" id="new-username" placeholder="Nuevo Usuario" required>
+      <input type="password" id="new-password" placeholder="Contraseña" required>
       <select id="new-role">
         <option value="usuario">Usuario</option>
         <option value="empleado">Empleado</option>
         <option value="admin">Administrador</option>
       </select>
-      <button onclick="addUser()">Añadir Usuario</button>
-    </div>
+      <button type="submit">Añadir Usuario</button>
+    </form>
 
     <a href="index.html"><button>Cerrar sesión</button></a>
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Obtener los usuarios desde localStorage (si existen)
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    // Cargar la lista de usuarios
-    function loadUsers() {
-      const tableBody = document.querySelector("#users-table tbody");
-      tableBody.innerHTML = "";
-
-      usuarios.forEach((user, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${user.username}</td>
-          <td>${user.rol}</td>
-          <td>
-            <button onclick="editUser(${index})">Editar</button>
-            <button onclick="deleteUser(${index})">Eliminar</button>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // Añadir nuevo usuario
-    function addUser() {
-      const username = document.getElementById("new-username").value.trim();
-      const password = document.getElementById("new-password").value.trim();
-      const role = document.getElementById("new-role").value;
-
-      if (username && password) {
-        // Crear el nuevo usuario
-        const newUser = { username, password, rol: role };
-
-        // Agregar el nuevo usuario a la lista
-        usuarios.push(newUser);
-
-        // Guardar los usuarios actualizados en localStorage
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-        // Recargar la lista de usuarios
-        loadUsers();
-
-        // Limpiar el formulario
-        clearForm();
-      }
-    }
-
-    // Editar usuario
-    function editUser(index) {
-      const user = usuarios[index];
-      document.getElementById("new-username").value = user.username;
-      document.getElementById("new-password").value = user.password;
-      document.getElementById("new-role").value = user.rol;
-
-      // Reemplazar el botón "Añadir Usuario" por un botón "Guardar Cambios"
-      const addButton = document.querySelector(".form-container button");
-      addButton.textContent = "Guardar Cambios";
-      addButton.setAttribute("onclick", `saveChanges(${index})`);
-    }
-
-    // Guardar cambios en el usuario
-    function saveChanges(index) {
-      const username = document.getElementById("new-username").value.trim();
-      const password = document.getElementById("new-password").value.trim();
-      const role = document.getElementById("new-role").value;
-
-      if (username && password) {
-        // Actualizar el usuario en la lista
-        usuarios[index] = { username, password, rol: role };
-
-        // Guardar los usuarios actualizados en localStorage
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-        // Recargar la lista de usuarios
-        loadUsers();
-
-        // Limpiar el formulario
-        clearForm();
-
-        // Restaurar el texto del botón y la función original
-        const addButton = document.querySelector(".form-container button");
-        addButton.textContent = "Añadir Usuario";
-        addButton.setAttribute("onclick", "addUser()");
-      }
-    }
-
-    // Eliminar usuario
-    function deleteUser(index) {
-      if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
-        usuarios.splice(index, 1); // Eliminar el usuario de la lista
-        localStorage.setItem("usuarios", JSON.stringify(usuarios)); // Guardar cambios en localStorage
-        loadUsers(); // Recargar la tabla
-      }
-    }
-
-    // Limpiar el formulario
-    function clearForm() {
-      document.getElementById("new-username").value = "";
-      document.getElementById("new-password").value = "";
-      document.getElementById("new-role").value = "usuario";
-    }
-
-    // Cargar usuarios cuando se carga la página
-    loadUsers();
-  </script>
 </body>
 </html>
