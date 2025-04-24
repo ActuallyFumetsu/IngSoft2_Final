@@ -90,25 +90,27 @@
       const password = document.getElementById("password").value.trim();
       const errorMsg = document.getElementById("error-msg");
 
+      // Traemos los usuarios del localStorage
       const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      // Buscamos al usuario que coincida con el username y password
       const user = usuarios.find(u => u.username === username && u.password === password);
 
       if (user) {
+        // Guardamos al usuario actual en localStorage
         localStorage.setItem("usuarioActual", JSON.stringify(user));
 
+        // Redirigimos según el rol del usuario
         if (user.rol === "admin") {
           window.location.href = "admin.html";
-        } else {
+        } else if (user.rol === "empleado" || user.rol === "usuario") {
           window.location.href = "usuario.html";
         }
       } else {
+        // Si las credenciales no son correctas, mostramos un mensaje de error
         errorMsg.textContent = "Usuario o contraseña incorrectos.";
       }
     }
-  </script>
-</body>
-</html>
-
   </script>
 </body>
 </html>
