@@ -18,19 +18,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = passwordInput.value;
 
         if (defaultUsers.hasOwnProperty(username) && defaultUsers[username] === password) {
-            let role = '';
             if (username === 'admin') {
-                role = 'administrador';
-            } else if (username === 'empleado') {
-                role = 'empleado';
+                window.location.href = 'admin.html';
             } else {
-                role = 'usuario';
+                let role = '';
+                if (username === 'empleado') {
+                    role = 'empleado';
+                } else {
+                    role = 'usuario';
+                }
+                messageDiv.textContent = `¡Bienvenido, ${username} (${role})! Inicio de sesión exitoso.`;
+                messageDiv.className = 'message success';
+                console.log(`Usuario ${username} (${role}) ha iniciado sesión.`);
+                // Aquí podrías redirigir a la página correspondiente para usuarios y empleados
+                // Por ejemplo: window.location.href = `/${role}-dashboard.html`;
             }
-            messageDiv.textContent = `¡Bienvenido, ${username} (${role})! Inicio de sesión exitoso.`;
-            messageDiv.className = 'message success';
-            // Aquí podrías redirigir al usuario a su panel correspondiente
-            console.log(`Usuario ${username} (${role}) ha iniciado sesión.`);
-            // Por ejemplo: window.location.href = `/${role}-dashboard.html`;
         } else {
             messageDiv.textContent = 'Credenciales incorrectas. Inténtalo de nuevo.';
             messageDiv.className = 'message error';
