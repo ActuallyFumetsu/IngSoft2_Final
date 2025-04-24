@@ -109,7 +109,8 @@
 
   <script src="script.js"></script>
   <script>
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    // Obtener los usuarios desde localStorage (si existen)
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     // Cargar la lista de usuarios
     function loadUsers() {
@@ -137,12 +138,19 @@
       const role = document.getElementById("new-role").value;
 
       if (username && password) {
+        // Crear el nuevo usuario
         const newUser = { username, password, rol: role };
+
+        // Agregar el nuevo usuario a la lista
         usuarios.push(newUser);
 
         // Guardar los usuarios actualizados en localStorage
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        loadUsers(); // Recargar la tabla
+
+        // Recargar la lista de usuarios
+        loadUsers();
+
+        // Limpiar el formulario
         clearForm();
       }
     }
@@ -167,11 +175,16 @@
       const role = document.getElementById("new-role").value;
 
       if (username && password) {
+        // Actualizar el usuario en la lista
         usuarios[index] = { username, password, rol: role };
 
         // Guardar los usuarios actualizados en localStorage
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        loadUsers(); // Recargar la tabla
+
+        // Recargar la lista de usuarios
+        loadUsers();
+
+        // Limpiar el formulario
         clearForm();
 
         // Restaurar el texto del botón y la función original
