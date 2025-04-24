@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Panel de Administración</h2>
+
+        <div class="user-management">
+            <h3>Gestión de Usuarios</h3>
+            <p>Usuarios existentes (sin contar admin): <span id="user-count">0</span></p>
+
+            <h4>Añadir Nuevo Usuario</h4>
+            <form id="add-user-form">
+                <div class="form-group">
+                    <label for="new-username">Nombre de Usuario:</label>
+                    <input type="text" id="new-username" name="new-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Contraseña:</label>
+                    <input type="password" id="new-password" name="new-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-role">Rol:</label>
+                    <select id="new-role" name="new-role">
+                        <option value="usuario">Usuario</option>
+                        <option value="empleado">Empleado</option>
+                    </select>
+                </div>
+                <button type="submit">Añadir Usuario</button>
+                <div id="add-message" class="message"></div>
+            </form>
+
+            <h4>Eliminar Usuario</h4>
+            <form id="delete-user-form">
+                <div class="form-group">
+                    <label for="delete-username">Nombre de Usuario a Eliminar:</label>
+                    <input type="text" id="delete-username" name="delete-username" required>
+                </div>
+                <button type="submit">Eliminar Usuario</button>
+                <div id="delete-message" class="message"></div>
+            </form>
+        </div>
+
+        <button onclick="window.location.href='index.html'">Cerrar Sesión</button>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
