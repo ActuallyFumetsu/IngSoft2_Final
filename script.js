@@ -20,18 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (defaultUsers.hasOwnProperty(username) && defaultUsers[username] === password) {
             if (username === 'admin') {
                 window.location.href = 'admin.html';
+            } else if (username === 'empleado') {
+                window.location.href = 'empleado.html';
             } else {
-                let role = '';
-                if (username === 'empleado') {
-                    role = 'empleado';
-                } else {
-                    role = 'usuario';
-                }
-                messageDiv.textContent = `¡Bienvenido, ${username} (${role})! Inicio de sesión exitoso.`;
+                messageDiv.textContent = `¡Bienvenido, ${username} (usuario)! Inicio de sesión exitoso.`;
                 messageDiv.className = 'message success';
-                console.log(`Usuario ${username} (${role}) ha iniciado sesión.`);
-                // Aquí podrías redirigir a la página correspondiente para usuarios y empleados
-                // Por ejemplo: window.location.href = `/${role}-dashboard.html`;
+                console.log(`Usuario ${username} (usuario) ha iniciado sesión.`);
+                // Aquí podrías redirigir a la página correspondiente para usuarios
+                // Por ejemplo: window.location.href = `/usuario-dashboard.html`;
             }
         } else {
             messageDiv.textContent = 'Credenciales incorrectas. Inténtalo de nuevo.';
