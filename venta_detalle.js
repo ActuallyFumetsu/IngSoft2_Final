@@ -38,18 +38,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function generarReportePDF() {
-        // Cargar la librería jsPDF dinámicamente si no está cargada
-        if (typeof jsPDF === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-            script.onload = () => {
-                crearDocumentoPDF();
-            };
-            document.head.appendChild(script);
-        } else {
-            crearDocumentoPDF();
-        }
+    // Cargar la librería jsPDF dinámicamente si no está cargada
+    if (typeof jsPDF === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        script.onload = crearDocumentoPDF; // Asigna la función directamente al onload
+        script.onerror = () => {
+            console.error('Error al cargar la librería jsPDF.');
+        };
+        document.head.appendChild(script);
+    } else {
+        crearDocumentoPDF();
     }
+}
 
     function crearDocumentoPDF() {
         const pdf = new jsPDF();
