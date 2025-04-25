@@ -52,7 +52,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 
-    function crearDocumentoPDF() {
+function generarReportePDF() {
+    // Cargar la librería jsPDF dinámicamente si no está cargada
+    if (typeof jsPDF === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        script.onload = function() {
+            // Ahora jsPDF debería estar definido, llamamos a la función para crear el PDF
+            crearDocumentoPDF();
+        };
+        script.onerror = () => {
+            console.error('Error al cargar la librería jsPDF.');
+        };
+        document.head.appendChild(script);
+    } else {
+        // jsPDF ya está definido, podemos crear el PDF directamente
+        crearDocumentoPDF();
+    }
+}
+
+function crearDocumentoPDF() {
+    if (typeof jsPDF !== 'undefined') {
         const pdf = new jsPDF();
         let y = 20;
         const lineHeight = 10;
@@ -121,7 +141,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         pdf.save('reporte_ventas.pdf');
+    } else {
+        console.error('La librería jsPDF no se ha cargado correctamente.');
     }
+}
 
     generarReportePdfButton.addEventListener('click', generarReportePDF);
 
