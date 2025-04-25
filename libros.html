@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Libros</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="libros.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestión de Libros</h2>
+
+        <div class="controls">
+            <button id="add-book-button">Añadir Libro</button>
+            <input type="text" id="search-input" placeholder="Buscar por título...">
+        </div>
+
+        <div id="add-edit-form" style="display:none;">
+            <h3>Añadir/Editar Libro</h3>
+            <form id="book-form">
+                <input type="hidden" id="libro-id">
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="autor_id">Autor ID:</label>
+                    <input type="number" id="autor_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="genero_id">Género ID:</label>
+                    <input type="number" id="genero_id">
+                </div>
+                <div class="form-group">
+                    <label for="estante_id">Estante ID:</label>
+                    <input type="number" id="estante_id">
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="number" id="precio" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock:</label>
+                    <input type="number" id="stock" required>
+                </div>
+                <button type="submit">Guardar</button>
+                <button type="button" id="cancel-button">Cancelar</button>
+                <div id="form-message" class="message"></div>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Autor ID</th>
+                    <th>Género ID</th>
+                    <th>Estante ID</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="book-list">
+                </tbody>
+        </table>
+
+        <button onclick="window.location.href='empleado.html'">Volver al Panel</button>
+    </div>
+
+    <script src="libros.js"></script>
+</body>
+</html>
