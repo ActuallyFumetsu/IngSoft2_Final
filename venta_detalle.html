@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ventas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="venta_detalle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestión de Ventas</h2>
+
+        <section id="venta-detalle">
+            <h3>Detalles de Venta</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Detalle</th>
+                        <th>ID Venta</th>
+                        <th>ID Libro</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="venta-detalle-list">
+                    </tbody>
+            </table>
+        </section>
+
+        <section id="venta-cabecera">
+            <h3>Cabecera de Venta</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>ID Cliente</th>
+                        <th>Fecha Venta</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="venta-cabecera-list">
+                    </tbody>
+            </table>
+        </section>
+
+        <button id="generar-reporte-pdf">Generar Reporte PDF</button>
+        <button onclick="window.location.href='empleado.html'">Volver al Panel</button>
+    </div>
+
+    <script src="venta_detalle.js"></script>
+    </body>
+</html>
