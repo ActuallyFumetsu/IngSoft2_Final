@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordInput = document.getElementById('password');
     const messageDiv = document.getElementById('message');
 
-    // Simulación de usuarios por defecto (en un entorno real, esto vendría del backend)
     const defaultUsers = {
         'usuario': 'clave123',
         'empleado': 'trabajo456',
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     loginForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de la forma predeterminada
+        event.preventDefault(); 
 
         const username = usernameInput.value;
         const password = passwordInput.value;
@@ -26,15 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 messageDiv.textContent = `¡Bienvenido, ${username} (usuario)! Inicio de sesión exitoso.`;
                 messageDiv.className = 'message success';
                 console.log(`Usuario ${username} (usuario) ha iniciado sesión.`);
-                // Aquí podrías redirigir a la página correspondiente para usuarios
-                // Por ejemplo: window.location.href = `/usuario-dashboard.html`;
             }
         } else {
             messageDiv.textContent = 'Credenciales incorrectas. Inténtalo de nuevo.';
             messageDiv.className = 'message error';
         }
 
-        // Limpiar los campos después de intentar iniciar sesión (opcional)
         usernameInput.value = '';
         passwordInput.value = '';
     });
