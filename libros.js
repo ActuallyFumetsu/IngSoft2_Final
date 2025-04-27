@@ -118,5 +118,5 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelButton.addEventListener('click', () => mostrarFormulario(false));
     bookForm.addEventListener('submit', guardarLibro);
 
-    mostrarLibros(); // Inicializar la lista de libros
+    mostrarLibros();
 });
