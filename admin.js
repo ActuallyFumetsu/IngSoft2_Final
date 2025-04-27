@@ -5,18 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const addMessageDiv = document.getElementById('add-message');
     const deleteMessageDiv = document.getElementById('delete-message');
 
-    // Simulación de almacenamiento de usuarios (en un entorno real, esto estaría en el backend)
     const users = {
         'usuario': 'clave123',
         'empleado': 'trabajo456'
-        // 'admin': 'secreto789' - No se incluye aquí para no poder eliminarlo desde la interfaz
     };
 
     function updateUserCount() {
         userCountSpan.textContent = Object.keys(users).length;
     }
 
-    updateUserCount(); // Inicializar el contador
+    updateUserCount();
 
     addUserForm.addEventListener('submit', function(event) {
         event.preventDefault();
