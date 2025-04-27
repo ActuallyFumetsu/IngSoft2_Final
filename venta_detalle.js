@@ -38,11 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function generarReportePDF() {
-    // Cargar la librería jsPDF dinámicamente si no está cargada
     if (typeof jsPDF === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-        script.onload = crearDocumentoPDF; // Asigna la función directamente al onload
+        script.onload = crearDocumentoPDF;
         script.onerror = () => {
             console.error('Error al cargar la librería jsPDF.');
         };
@@ -53,12 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 function generarReportePDF() {
-    // Cargar la librería jsPDF dinámicamente si no está cargada
     if (typeof jsPDF === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js';
         script.onload = function() {
-            // Ahora jsPDF debería estar definido, llamamos a la función para crear el PDF
             crearDocumentoPDF();
         };
         script.onerror = () => {
@@ -66,7 +63,6 @@ function generarReportePDF() {
         };
         document.head.appendChild(script);
     } else {
-        // jsPDF ya está definido, podemos crear el PDF directamente
         crearDocumentoPDF();
     }
 }
@@ -85,7 +81,6 @@ function crearDocumentoPDF() {
         pdf.text('Detalles de Venta:', 10, y);
         y += lineHeight;
 
-        // Encabezado de la tabla de detalles
         const detalleColumnas = ['ID Detalle', 'ID Venta', 'ID Libro', 'Cantidad', 'Subtotal'];
         let x = 10;
         detalleColumnas.forEach(col => {
@@ -96,7 +91,6 @@ function crearDocumentoPDF() {
         pdf.line(10, y, x - 10, y);
         y += 2;
 
-        // Datos de la tabla de detalles
         ventaDetalle.forEach(detalle => {
             x = 10;
             pdf.text(detalle.detalle_id.toString(), x, y); x += 30;
@@ -115,7 +109,6 @@ function crearDocumentoPDF() {
         pdf.text('Cabecera de Venta:', 10, y);
         y += lineHeight;
 
-        // Encabezado de la tabla de cabecera
         const cabeceraColumnas = ['ID Venta', 'ID Cliente', 'Fecha Venta', 'Total'];
         x = 10;
         cabeceraColumnas.forEach(col => {
@@ -126,7 +119,6 @@ function crearDocumentoPDF() {
         pdf.line(10, y, x - 10, y);
         y += 2;
 
-        // Datos de la tabla de cabecera
         ventaCabecera.forEach(cabecera => {
             x = 10;
             pdf.text(cabecera.venta_id.toString(), x, y); x += 40;
