@@ -27,5 +27,5 @@ document.addEventListener('DOMContentLoaded', function() {
         mostrarClientes(clientesFiltrados);
     });
 
-    mostrarClientes(); // Inicializar la lista de clientes
+    mostrarClientes();
 });
